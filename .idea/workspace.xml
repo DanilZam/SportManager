@@ -4,19 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef65de43-5e20-4fd6-a02d-59361be6933e" name="Changes" comment="1">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/controllers/DayRecordController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/controllers/FoodController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/controllers/MainController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/controllers/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/DayRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/Exercise.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/Food.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/Statistics.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/TrainingRecord.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/User.java" afterDir="false" />
+    <list default="true" id="ef65de43-5e20-4fd6-a02d-59361be6933e" name="Changes" comment="Add files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/Food.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/TrainingRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/TrainingRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +26,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -55,14 +52,16 @@
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;
   }
 }</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -82,7 +81,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734766708880</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Add files">
+      <option name="closed" value="true" />
+      <created>1734875040459</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1734875040459</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -99,6 +106,7 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="1" />
-    <option name="LAST_COMMIT_MESSAGE" value="1" />
+    <MESSAGE value="Add files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add files" />
   </component>
 </project>
