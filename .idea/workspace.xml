@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef65de43-5e20-4fd6-a02d-59361be6933e" name="Changes" comment="Add files">
+    <list default="true" id="ef65de43-5e20-4fd6-a02d-59361be6933e" name="Changes" comment="Change some models">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/Food.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/TrainingRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/TrainingRecord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +84,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734875040459</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Change some models">
+      <option name="closed" value="true" />
+      <created>1734883918988</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1734883918988</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -107,6 +110,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="1" />
     <MESSAGE value="Add files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add files" />
+    <MESSAGE value="Change some models" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change some models" />
   </component>
 </project>
