@@ -4,26 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef65de43-5e20-4fd6-a02d-59361be6933e" name="Changes" comment="Add auth controllers">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/HashUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/MySQLConnection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/UserSession.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/controllers/AuthorizationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/repositories/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/gym_background.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/palette1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/authorization-view.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/styles/authorization.css" afterDir="false" />
+    <list default="true" id="ef65de43-5e20-4fd6-a02d-59361be6933e" name="Changes" comment="Authorization window">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/person.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/main-view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/HelloController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/controllers/SignInController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/controllers/SignUpController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/controllers/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/app/sportmanager/hello-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/controllers/AuthorizationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/controllers/AuthorizationController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +18,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -61,23 +47,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.HelloApplication.executor": "Run",
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/JavaProject/SportManager/src/main/resources/assets",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\JavaProject\SportManager\src\main\resources\assets" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\JavaProject\SportManager\src\main\resources\fxml" />
     </key>
@@ -124,7 +114,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734883918988</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Authorization window">
+      <option name="closed" value="true" />
+      <created>1735646185940</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1735646185940</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -143,6 +141,7 @@
     <MESSAGE value="1" />
     <MESSAGE value="Add files" />
     <MESSAGE value="Change some models" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change some models" />
+    <MESSAGE value="Authorization window" />
+    <option name="LAST_COMMIT_MESSAGE" value="Authorization window" />
   </component>
 </project>
