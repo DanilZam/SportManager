@@ -4,8 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef65de43-5e20-4fd6-a02d-59361be6933e" name="Changes" comment="Change some models">
+    <list default="true" id="ef65de43-5e20-4fd6-a02d-59361be6933e" name="Changes" comment="Add auth controllers">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/HashUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/MySQLConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/UserSession.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/controllers/AuthorizationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/repositories/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/gym_background.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/palette1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/fxml/authorization-view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/styles/authorization.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/controllers/SignInController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/controllers/SignUpController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/app/sportmanager/hello-view.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,12 +71,26 @@
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\JavaProject\SportManager\src\main\resources\fxml" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="org.app.sportmanager.Main" />
+      <module name="SportManager" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

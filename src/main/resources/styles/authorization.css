@@ -1,0 +1,62 @@
+#mainPane{
+    -fx-background-image: url("../assets/gym_background.jpg");
+    /*-fx-pref-width: 710;*/
+    -fx-background-size: cover; /* Масштабировать изображение по всей области */
+    -fx-background-position: center center; /* Центрировать изображение */
+    -fx-background-repeat: no-repeat;
+}
+
+#backgroundPane{
+    -fx-background-color: linear-gradient(rgba(106, 107, 107, 1), rgba(106, 107, 107, 1));
+    /*-fx-alignment: center-right;*/
+}
+
+#signin_pane{
+    /*-fx-background-color: rgba(106, 107, 107, 0.9);*/
+    /*-fx-border-color: rgb(209, 70, 20);*/
+    /*-fx-border-width: 2 0 0 0;*/
+    /*-fx-border-radius: 9;*/
+    /*-fx-background-radius: 9;*/
+    -fx-alignment: center;
+}
+
+Separator .line{
+    /*-fx-background-color: red;*/
+    -fx-border-color: rgb(152, 135, 239) ;
+}
+
+.auth_fields{
+    -fx-border-width: 3;
+    -fx-border-radius: 20;
+    -fx-border-color: rgb(152, 135, 239);
+    -fx-background-radius: 22;
+}
+
+.def_button{
+    -fx-background-color: none;
+    -fx-text-fill: rgb(143, 143, 143);
+    -fx-border-width: 0 0 4 0;
+    -fx-border-color: rgb(143, 143, 143);
+}
+
+.pressed_button{
+    -fx-background-color: none;
+    -fx-text-fill: rgb(152, 135, 239);
+    -fx-border-width: 0 0 4 0;
+    -fx-border-color: rgb(152, 135, 239);
+}
+
+.auth_button{
+    -fx-background-color: rgb(235, 235, 235);
+    -fx-text-fill: rgb(152, 135, 239);
+    -fx-border-width: 3;
+    -fx-border-color: rgb(152, 135, 239);
+    -fx-border-radius: 13;
+    -fx-background-radius: 16;
+}
+
+
+/*
+#mainHBox{
+    -fx-alignment: center-right;
+}*/
