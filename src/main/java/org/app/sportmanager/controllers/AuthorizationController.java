@@ -1,15 +1,22 @@
 package org.app.sportmanager.controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import org.app.sportmanager.HashUtil;
 import org.app.sportmanager.UserSession;
 import org.app.sportmanager.models.User;
 import org.app.sportmanager.repositories.UserRepository;
+
+import java.io.IOException;
 
 public class AuthorizationController {
 
@@ -88,6 +95,26 @@ public class AuthorizationController {
             }
 
             if(userRepository.signIn(username, password)){
+                try {
+                    // Загружаем FXML нового окна
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main-view.fxml"));
+                    Parent root = loader.load();
+
+                    // Получаем Stage из события
+                    Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+                    // Создаем и настраиваем новое окно
+                    Stage newStage = new Stage();
+                    newStage.setScene(new Scene(root));
+                    newStage.setTitle("Sport Manager"); // Заголовок нового окна
+                    newStage.show();
+
+                    // Закрываем старое окно
+                    currentStage.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 System.out.println("Open win");
             }
             else{
@@ -138,6 +165,27 @@ public class AuthorizationController {
                 Long id = userRepository.addUser(username, password);
                 User newUser = new User(id, username, HashUtil.hashPassword(password));
                 UserSession.getInstance().setCurrentUser(newUser);
+
+                try {
+                    // Загружаем FXML нового окна
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main-view.fxml"));
+                    Parent root = loader.load();
+
+                    // Получаем Stage из события
+                    Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+                    // Создаем и настраиваем новое окно
+                    Stage newStage = new Stage();
+                    newStage.setScene(new Scene(root));
+                    newStage.setTitle("Sport Manager"); // Заголовок нового окна
+                    newStage.show();
+
+                    // Закрываем старое окно
+                    currentStage.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 System.out.println("Open win");
                 return;
