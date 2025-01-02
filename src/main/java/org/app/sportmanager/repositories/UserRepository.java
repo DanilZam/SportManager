@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserRepository {
 
@@ -42,8 +44,8 @@ public class UserRepository {
         return generated_id;
     }
 
-    public boolean signIn(String username, String password){
-        String query = "SELECT password FROM users WHERE username = ?";
+    public Integer signIn(String username, String password){
+        String query = "SELECT id, password FROM users WHERE username = ?";
 
         try (Connection connection = MySQLConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)){
@@ -53,7 +55,10 @@ public class UserRepository {
             try (ResultSet resultSet = statement.executeQuery()){
                 if(resultSet.next()){
                     String hashPassword = resultSet.getString("password");
-                    return HashUtil.checkPassword(password, hashPassword);
+                    if (HashUtil.checkPassword(password, hashPassword)){
+                        return Integer.parseInt(resultSet.getString("id"));
+                    }
+
                 }
             }
 
@@ -61,8 +66,10 @@ public class UserRepository {
             e.printStackTrace();
         }
 
-        return false;
+        return -1;
     }
+
+
 
     public boolean checkUserExist(String username){
         String query = "SELECT * FROM users WHERE username = ?";

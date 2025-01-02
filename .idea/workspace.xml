@@ -4,14 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef65de43-5e20-4fd6-a02d-59361be6933e" name="Changes" comment="Some changes in main fxml">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/repositories/ExerciseRepository.java" afterDir="false" />
+    <list default="true" id="ef65de43-5e20-4fd6-a02d-59361be6933e" name="Changes" comment="Exercises list add">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/fx_nodes/TrainingTableRow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/repositories/TrainingRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/controllers/AuthorizationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/controllers/AuthorizationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/controllers/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/Exercise.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/Exercise.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/DayRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/DayRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/TrainingRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/Training.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/models/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/repositories/ExerciseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/repositories/ExerciseRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/repositories/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/main-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -145,7 +149,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735745749238</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Exercises list add">
+      <option name="closed" value="true" />
+      <created>1735766866678</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1735766866678</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -167,6 +179,7 @@
     <MESSAGE value="Authorization window" />
     <MESSAGE value="Create main window" />
     <MESSAGE value="Some changes in main fxml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Some changes in main fxml" />
+    <MESSAGE value="Exercises list add" />
+    <option name="LAST_COMMIT_MESSAGE" value="Exercises list add" />
   </component>
 </project>

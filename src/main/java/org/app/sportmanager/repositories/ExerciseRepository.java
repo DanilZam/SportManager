@@ -39,6 +39,29 @@ public class ExerciseRepository {
         return exercises;
     }
 
+    public List<String> getMuscleGroupsByExerciseId(String exerciseId) {
+        // Поиск документа с соответствующим id
+        Document doc = collection.find(new Document("_id", exerciseId)).first();
+
+        if (doc != null) {
+            // Преобразование документа в объект Exercise и возврат мышечных групп
+            Exercise exercise = documentToExercise(doc);
+            return exercise.getMuscleGroups();
+        }
+
+        // Если упражнение не найдено, возвращается пустой список
+        return new ArrayList<>();
+    }
+
+    public String getExerciseIdByName(String name){
+        Document doc = collection.find(new Document("name", name)).first();
+        if(doc != null){
+            Exercise exercise = documentToExercise(doc);
+            return exercise.getId();
+        }
+        return null;
+    }
+
     // Преобразование Document в Exercise
     private Exercise documentToExercise(Document doc) {
         String id = doc.get("_id").toString();

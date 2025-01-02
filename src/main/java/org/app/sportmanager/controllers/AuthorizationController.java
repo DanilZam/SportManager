@@ -94,8 +94,10 @@ public class AuthorizationController {
                 return;
             }
 
-            if(userRepository.signIn(username, password)){
+            int userId = userRepository.signIn(username, password);
+            if(userId > -1){
                 try {
+                    UserSession.getInstance().setCurrentUser(new User((long)userId, username, password));
                     // Загружаем FXML нового окна
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main-view.fxml"));
                     Parent root = loader.load();

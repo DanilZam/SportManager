@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -67,26 +68,9 @@
    <center>
       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="trainings_anchorpane" prefHeight="200.0" prefWidth="200.0" visible="false">
+            <AnchorPane fx:id="newtarin_anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="600.0" visible="false">
                <children>
-                  <Button fx:id="add_train_button" layoutX="112.0" layoutY="156.0" mnemonicParsing="false" text="Добавить тренировку" />
-                  <TableView fx:id="trainings_tableview" layoutX="112.0" layoutY="202.0" prefHeight="613.0" prefWidth="827.0">
-                    <columns>
-                      <TableColumn fx:id="train_name_column" prefWidth="77.0" text="Наименование" />
-                      <TableColumn fx:id="train_date_column" prefWidth="73.0" text="Дата" />
-                        <TableColumn fx:id="train_muscles_column" prefWidth="75.0" text="Мышечные группы" />
-                    </columns>
-                  </TableView>
-                  <Label layoutX="112.0" layoutY="45.0" text="Выбрать по дате" />
-                  <Label layoutX="112.0" layoutY="75.0" text="С" />
-                  <DatePicker fx:id="start_datepicker" layoutX="128.0" layoutY="71.0" />
-                  <Label layoutX="316.0" layoutY="75.0" text="по" />
-                  <DatePicker fx:id="end_datepicker" layoutX="338.0" layoutY="71.0" />
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="newtarin_anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0">
-               <children>
-                  <ScrollPane layoutX="71.9000015258789" layoutY="57.900001525878906">
+                  <ScrollPane fitToWidth="true" layoutX="50.0" layoutY="152.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="365.0" prefViewportHeight="460.0" prefViewportWidth="500.0" prefWidth="500.0">
                      <content>
                         <VBox fx:id="newtrain_vbox">
                            <children>
@@ -95,7 +79,10 @@
                         </VBox>
                      </content>
                   </ScrollPane>
-                  <Button fx:id="create_train_button" layoutX="444.0" layoutY="556.0" mnemonicParsing="false" text="Создать тренировку" />
+                  <Button fx:id="create_train_button" layoutX="444.0" layoutY="538.0" mnemonicParsing="false" text="Создать тренировку" />
+                  <DatePicker fx:id="train_date_datepicker" layoutX="370.0" layoutY="27.0" />
+                  <Label layoutX="270.0" layoutY="31.0" text="Выберите дату" />
+                  <TextArea fx:id="train_description_textarea" layoutX="50.0" layoutY="67.0" prefHeight="71.0" prefWidth="500.0" promptText="Введите наименование тренировки (её краткое описание)" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="exercises_anchorpane" prefHeight="200.0" prefWidth="200.0" visible="false">
@@ -112,6 +99,28 @@
                   <Button fx:id="search_exercises_button" layoutX="198.0" layoutY="101.0" mnemonicParsing="false" text="Поиск" />
                   <TextField fx:id="exercises_search_textfield" layoutX="364.0" layoutY="104.0" AnchorPane.leftAnchor="364.0" />
                   <TextField fx:id="muscles_search_textfield" layoutX="694.0" layoutY="104.0" AnchorPane.leftAnchor="694.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="trainings_anchorpane" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="add_train_button" layoutX="112.0" layoutY="202.0" mnemonicParsing="false" text="Добавить тренировку" />
+                  <TableView fx:id="trainings_tableview" layoutX="112.0" layoutY="232.0" prefHeight="583.0" prefWidth="827.0">
+                    <columns>
+                      <TableColumn fx:id="train_name_column" prefWidth="77.0" text="Наименование" />
+                      <TableColumn fx:id="train_date_column" prefWidth="73.0" text="Дата" />
+                      <TableColumn fx:id="train_muscles_column" prefWidth="75.0" text="Мышечные группы" />
+                    </columns>
+                  </TableView>
+                  <Label layoutX="759.0" layoutY="57.0" text="Выбрать по дате" />
+                  <Label layoutX="747.0" layoutY="82.0" text="С" />
+                  <DatePicker fx:id="start_datepicker" layoutX="759.0" layoutY="78.0" />
+                  <Label layoutX="739.0" layoutY="134.0" text="по" />
+                  <DatePicker fx:id="end_datepicker" layoutX="759.0" layoutY="130.0" />
+                  <TextField fx:id="search_train_name_textfield" layoutX="303.0" layoutY="75.0" prefHeight="32.0" prefWidth="293.0" />
+                  <Label layoutX="216.0" layoutY="82.0" text="По названию:" />
+                  <TextField fx:id="search_train_muscle_textfield" layoutX="354.0" layoutY="127.0" prefHeight="32.0" prefWidth="249.0" />
+                  <Label layoutX="216.0" layoutY="134.0" text="По мышечной группе:" />
+                  <Label layoutX="216.0" layoutY="57.0" text="Поиск:" />
                </children>
             </AnchorPane>
          </children>
