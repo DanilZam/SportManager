@@ -16,6 +16,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.web.HTMLEditor?>
+<?import javafx.scene.web.WebView?>
 
 <BorderPane fx:id="main_borderpane" prefHeight="858.0" prefWidth="1268.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.sportmanager.controllers.MainController">
    <left>
@@ -101,7 +103,7 @@
                   <TextField fx:id="muscles_search_textfield" layoutX="694.0" layoutY="104.0" AnchorPane.leftAnchor="694.0" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="trainings_anchorpane" prefHeight="200.0" prefWidth="200.0">
+            <AnchorPane fx:id="trainings_anchorpane" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
                   <Button fx:id="add_train_button" layoutX="112.0" layoutY="202.0" mnemonicParsing="false" text="Добавить тренировку" />
                   <TableView fx:id="trainings_tableview" layoutX="112.0" layoutY="232.0" prefHeight="583.0" prefWidth="827.0">
@@ -121,6 +123,73 @@
                   <TextField fx:id="search_train_muscle_textfield" layoutX="354.0" layoutY="127.0" prefHeight="32.0" prefWidth="249.0" />
                   <Label layoutX="216.0" layoutY="134.0" text="По мышечной группе:" />
                   <Label layoutX="216.0" layoutY="57.0" text="Поиск:" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="calculator_anchorpane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" visible="false">
+               <children>
+                  <Label layoutX="253.0" layoutY="63.0" text="Вес" />
+                  <TextField fx:id="weight_textfield" layoutX="253.0" layoutY="88.0" />
+                  <Label layoutX="579.0" layoutY="63.0" text="Количество повторений" />
+                  <TextField fx:id="reps_textfield" layoutX="579.0" layoutY="88.0" />
+                  <ScrollPane fx:id="calc_scrollpane" fitToWidth="true" layoutX="153.0" layoutY="154.0" prefHeight="599.0" prefWidth="776.0">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="calc_tableview" prefHeight="399.0" prefWidth="751.0">
+                                <columns>
+                                  <TableColumn fx:id="repsColumn" prefWidth="75.0" text="Количество повторений" />
+                                  <TableColumn fx:id="brzyckiColumn" prefWidth="75.0" text="Matt Brzycki" />
+                                    <TableColumn fx:id="epleyColumn" prefWidth="75.0" text="Boyd Epley" />
+                                    <TableColumn fx:id="landerColumn" prefWidth="75.0" text="Lander" />
+                                    <TableColumn fx:id="oconnerColumn" prefWidth="75.0" text="O'Conner" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="articles_anchorpane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" visible="false">
+               <children>
+                  <Button fx:id="create_article_button" layoutX="76.0" layoutY="51.0" mnemonicParsing="false" text="Создать статью" />
+                  <TableView fx:id="articles_tableview" layoutX="76.0" layoutY="187.0" prefHeight="592.0" prefWidth="928.0">
+                    <columns>
+                      <TableColumn fx:id="article_name_column" prefWidth="363.0" text="Название статьи" />
+                      <TableColumn fx:id="article_date_column" prefWidth="225.0" text="Дата создания" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="article_view_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: white;" visible="false">
+               <children>
+                  <Label fx:id="article_title_label" layoutX="53.0" layoutY="36.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="71.0" prefWidth="794.0" text="Title" textAlignment="CENTER">
+                     <font>
+                        <Font name="Arial Black" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="article_date_label" layoutX="53.0" layoutY="647.0" text="Date" />
+                  <Button fx:id="close_view_button" layoutX="779.0" layoutY="641.0" mnemonicParsing="false" text="Закрыть" />
+                  <WebView fx:id="article_content_webview" layoutX="53.0" layoutY="99.0" prefHeight="531.0" prefWidth="794.0" />
+                  <Button fx:id="edit_article_button" layoutX="582.0" layoutY="641.0" mnemonicParsing="false" text="Редактировать" />
+                  <Button fx:id="delete_article_button" layoutX="702.0" layoutY="641.0" mnemonicParsing="false" text="Удалить" />
+               </children></AnchorPane>
+            <AnchorPane fx:id="create_article_anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: white;">
+               <children>
+                  <HTMLEditor fx:id="article_htmleditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="7.0" layoutY="50.0" prefHeight="556.0" prefWidth="887.0" />
+                  <Button fx:id="add_newarticle_button" layoutX="670.0" layoutY="639.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="138.0" text="Добавить статью" />
+                  <Label layoutX="126.0" layoutY="21.0" text="Название статьи:" />
+                  <TextField fx:id="article_title_textfield" layoutX="243.0" layoutY="17.0" prefHeight="26.0" prefWidth="444.0" />
+                  <Button fx:id="exit_create_article_pane" layoutX="818.0" layoutY="639.0" mnemonicParsing="false" text="Закрыть" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="article_edit_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: white;" visible="false">
+               <children>
+                  <TextField fx:id="edit_article_title_field" layoutX="144.0" layoutY="26.0" prefHeight="26.0" prefWidth="717.0" />
+                  <Label layoutX="28.0" layoutY="31.0" text="Название статьи:" />
+                  <HTMLEditor fx:id="edit_article_content_htmleditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="28.0" layoutY="84.0" prefHeight="550.0" prefWidth="835.0" />
+                  <Button fx:id="save_article_button" layoutX="687.0" layoutY="650.0" mnemonicParsing="false" text="Сохранить" />
+                  <Button fx:id="cancel_edit_button" layoutX="795.0" layoutY="650.0" mnemonicParsing="false" text="Закрыть" />
                </children>
             </AnchorPane>
          </children>

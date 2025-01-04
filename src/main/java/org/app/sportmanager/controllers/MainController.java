@@ -1,22 +1,29 @@
 package org.app.sportmanager.controllers;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Worker;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.web.HTMLEditor;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import org.app.sportmanager.UserSession;
+import org.app.sportmanager.fx_nodes.ResultRow;
 import org.app.sportmanager.fx_nodes.TrainingTableRow;
+import org.app.sportmanager.models.Article;
 import org.app.sportmanager.models.Exercise;
 import org.app.sportmanager.models.Training;
+import org.app.sportmanager.repositories.ArticleRepository;
 import org.app.sportmanager.repositories.ExerciseRepository;
 import org.app.sportmanager.repositories.TrainingRepository;
+
+
 
 import java.time.LocalDate;
 import java.util.*;
@@ -29,10 +36,15 @@ public class MainController {
     private final String DB_NAME = "sportmanager";
     private final String EXERCISES_COLLECTION = "exercises";
     private final String TRAININGS_COLLECTION = "trainings";
+    private final String ARTICLES_COLLECTION = "articles";
 
     private ObservableList<TrainingTableRow> originalData = FXCollections.observableArrayList();
 
+    private Article selectedArticle;
 
+    private List<Pane> panes;
+
+    private boolean changesSaved = false;
 
     @FXML
     public Button add_newexcercise_button;
@@ -134,7 +146,109 @@ public class MainController {
     public TextField search_train_muscle_textfield;
 
     @FXML
+    public AnchorPane calculator_anchorpane;
+
+    @FXML
+    public TextField weight_textfield;
+
+    @FXML
+    public TextField reps_textfield;
+
+    @FXML
+    public TableView<ResultRow> calc_tableview;
+
+    @FXML
+    public TableColumn<ResultRow, String> repsColumn;
+
+    @FXML
+    public TableColumn<ResultRow, String> brzyckiColumn;
+
+    @FXML
+    public TableColumn<ResultRow, String> epleyColumn;
+
+    @FXML
+    public TableColumn<ResultRow, String> landerColumn;
+
+    @FXML
+    public TableColumn<ResultRow, String> oconnerColumn;
+
+    @FXML
+    public AnchorPane articles_anchorpane;
+    @FXML
+    public AnchorPane create_article_anchorpane;
+
+    @FXML
+    public Button create_article_button;
+    @FXML
+    public TableView<Article> articles_tableview;
+    @FXML
+    public TableColumn<Article, String> article_name_column;
+    @FXML
+    public TableColumn<Article, String> article_date_column;
+
+    @FXML
+    public TextField article_title_textfield;
+
+    @FXML
+    public HTMLEditor article_htmleditor;
+
+    @FXML
+    public Button add_newarticle_button;
+
+    @FXML
+    public AnchorPane article_view_pane;
+
+    @FXML
+    public Label article_title_label;
+
+    @FXML
+    public WebView article_content_webview;
+
+    @FXML
+    public Button close_view_button;
+
+    @FXML
+    public Label article_date_label;
+
+    @FXML
+    public TextField edit_article_title_field;
+
+    @FXML
+    public HTMLEditor edit_article_content_htmleditor;
+
+    @FXML
+    public AnchorPane article_edit_pane;
+
+    @FXML
+    public Button save_article_button;
+
+    @FXML
+    public Button cancel_edit_button;
+
+    @FXML
+    public Button edit_article_button;
+
+    @FXML
+    public Button delete_article_button;
+
+    @FXML
+    public Button exit_create_article_pane;
+
+
+    @FXML
     public void initialize() {
+        panes = Arrays.asList(
+                trainings_anchorpane,
+                newtarin_anchorpane,
+                exercises_anchorpane,
+                calculator_anchorpane,
+                article_view_pane,
+                articles_anchorpane,
+                create_article_anchorpane,
+                article_edit_pane
+        );
+
+        newtarin_anchorpane.toFront();
 
         loadTrainingsToTableView(trainings_tableview);
         originalData.addAll(trainings_tableview.getItems());
@@ -150,6 +264,82 @@ public class MainController {
         trainings_anchorpane.setVisible(true);
         newtarin_anchorpane.setVisible(false);
         exercises_anchorpane.setVisible(false);
+        calculator_anchorpane.setVisible(false);
+        article_view_pane.setVisible(false);
+        articles_anchorpane.setVisible(false);
+        create_article_anchorpane.setVisible(false);
+        article_edit_pane.setVisible(false);
+
+
+        exit_create_article_pane.setOnAction(event -> exitCreateArticle());
+
+        create_article_button.setOnAction(event -> showCreateArticlePane());
+        articles_button.setOnAction(event -> {
+            ArticleRepository articleRepository = new ArticleRepository(CONNECTION_URL, DB_NAME, ARTICLES_COLLECTION);
+
+            showOnlyPane(articles_anchorpane);
+
+            article_name_column.setCellValueFactory(new PropertyValueFactory<>("title"));
+            article_date_column.setCellValueFactory(article ->
+                    new SimpleStringProperty(article.getValue().getDate().toString())
+            );
+
+            // Загрузка статей из MongoDB
+            loadArticles(articleRepository);
+
+        });
+
+
+        // Обрабатываем выбор строки в таблице
+        articles_tableview.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                showArticleDetails(newValue);
+                selectedArticle = newValue;
+            }
+            else {
+                System.out.println("Error open article");
+            }
+
+        });
+
+        edit_article_button.setOnAction(event -> {
+            edit_article_title_field.setText(selectedArticle.getTitle());
+            edit_article_content_htmleditor.setHtmlText(selectedArticle.getContent());
+
+            article_edit_pane.setVisible(true);
+            article_view_pane.setVisible(false);
+            changesSaved = false;
+        });
+
+        save_article_button.setOnAction(event -> saveEditedArticle());
+
+        delete_article_button.setOnAction(event -> deleteArticle());
+
+        cancel_edit_button.setOnAction(event -> {
+
+            if (!changesSaved){
+                String result = confirmActionAlert("Сохранить?", "Хотите сохранить изменения перед закрытием?");
+                if (result.equals("yes")){
+                    saveEditedArticle();
+                }
+            }
+            article_edit_pane.setVisible(false);
+            changesSaved = false;
+        });
+
+        // Закрыть просмотр
+        close_view_button.setOnAction(event -> closeArticleView());
+
+
+        /*articles_tableview.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                Article selectedArticle = articles_tableview.getSelectionModel().getSelectedItem();
+                if (selectedArticle != null) {
+                    showArticlePane(selectedArticle);
+                }
+            }
+        });*/
+
 
         name_column.setCellValueFactory(new PropertyValueFactory<>("name"));
         musclegroups_columns.setCellValueFactory(cellData -> {
@@ -163,16 +353,12 @@ public class MainController {
 
 
         trainings_button.setOnAction(event -> {
-            trainings_anchorpane.setVisible(true);
-            newtarin_anchorpane.setVisible(false);
-            exercises_anchorpane.setVisible(false);
+            showOnlyPane(trainings_anchorpane);
             loadTrainingsToTableView(trainings_tableview);
         });
 
         exercises_button.setOnAction(event -> {
-            trainings_anchorpane.setVisible(false);
-            newtarin_anchorpane.setVisible(false);
-            exercises_anchorpane.setVisible(true);
+            showOnlyPane(exercises_anchorpane);
 
             ExerciseRepository exerciseRepository = new ExerciseRepository(CONNECTION_URL, DB_NAME, EXERCISES_COLLECTION);
 
@@ -222,6 +408,95 @@ public class MainController {
 
         //trainings_button.setOnAction(event -> loadTrainingsToTableView(trainings_tableview));
 
+        repsColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getReps()));
+        brzyckiColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getBrzycki()));
+        epleyColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getEpley()));
+        landerColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getLander()));
+        oconnerColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getOconner()));
+
+        // Добавление слушателя для обновления таблицы при изменении значений
+        weight_textfield.textProperty().addListener((obs, oldText, newText) -> updateTable());
+        reps_textfield.textProperty().addListener((obs, oldText, newText) -> updateTable());
+
+        calculators_button.setOnAction(event -> showOnlyPane(calculator_anchorpane));
+
+        add_newarticle_button.setOnAction(event -> {
+            saveArticle();
+        });
+    }
+
+    private void exitCreateArticle() {
+        String title = edit_article_title_field.getText();
+        String articleHTML = edit_article_content_htmleditor.getHtmlText();
+        if (!articleHTML.isEmpty()){
+            String result = confirmActionAlert("Выйти?", "Вы действительно хотите выйти? Статья не будет сохранена!");
+            if (result.equals("yes")){
+                create_article_anchorpane.setVisible(false);
+            }
+        }
+    }
+
+    private void deleteArticle() {
+        String result = confirmActionAlert("Удалить?", "Хотите удалить данную статью?");
+        if (result.equals("yes")){
+            ArticleRepository repository = new ArticleRepository(CONNECTION_URL, DB_NAME, ARTICLES_COLLECTION);
+            if(repository.deleteArticleById(selectedArticle.getId())){
+                loadArticles(repository);
+                article_view_pane.setVisible(false);
+                showInfoAlert("Успех!", "Статья успешно удалена!");
+            }else {
+                showInfoAlert("Ошибка!", "Не удалось удалить статью!");
+            }
+        }
+
+    }
+
+    private void saveEditedArticle() {
+        String title = edit_article_title_field.getText();
+        if (title.isEmpty()){
+            showInfoAlert("Неверные данные", "Название статьи не должно быть пустым");
+            return;
+        }
+        String articleHTML = edit_article_content_htmleditor.getHtmlText();
+        if (articleHTML.isEmpty()){
+            showInfoAlert("Неверные данные", "Статья не может быть пустой");
+            return;
+        }
+
+        String result = confirmActionAlert("Сохранить изменения?", "Статья будет изменена!");
+
+        if (result.equals("yes")){
+            ArticleRepository repository = new ArticleRepository(CONNECTION_URL, DB_NAME, ARTICLES_COLLECTION);
+            Article article = new Article(title, articleHTML, LocalDate.now());
+            article.setId(selectedArticle.getId());
+            repository.updateArticle(article);
+            loadArticles(repository);
+            changesSaved = true;
+        }
+
+
+    }
+
+    private void saveArticle() {
+        ArticleRepository repository = new ArticleRepository(CONNECTION_URL, DB_NAME, ARTICLES_COLLECTION);
+        String title = article_title_textfield.getText();
+        if (title.isEmpty()){
+            showInfoAlert("Неверные данные", "Название статьи не должно быть пустым");
+            return;
+        }
+        String articleHTML = article_htmleditor.getHtmlText();
+        if (articleHTML.isEmpty()){
+            showInfoAlert("Неверные данные", "Статья не может быть пустой");
+            return;
+        }
+
+        Article article = new Article(title, articleHTML, LocalDate.now());
+        repository.saveArticle(article);
+
+        article_title_textfield.setText("");
+        article_htmleditor.setHtmlText("");
+
+        loadArticles(repository);
     }
 
     private void addExerciseBlock(VBox mainVBox) {
@@ -447,6 +722,128 @@ public class MainController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    private String confirmActionAlert(String header, String Content){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Подтверждение действия");
+        alert.setHeaderText(header);
+        alert.setContentText(Content);
+
+        ButtonType yesButton = new ButtonType("Да");
+        ButtonType noButton = new ButtonType("Нет");
+        ButtonType cancelButton = new ButtonType("Отмена");
+
+        alert.getButtonTypes().setAll(yesButton, noButton, cancelButton);
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent()) {
+            if (result.get() == yesButton) {
+                return "yes";
+            } else if (result.get() == noButton) {
+                return "no";
+            } else {
+                return "cancel";
+            }
+        }
+        return "null";
+
+    }
+
+    private void updateTable() {
+        String weightText = weight_textfield.getText();
+        String repsText = reps_textfield.getText();
+
+        try {
+            double weight = Double.parseDouble(weightText);
+            int reps = Integer.parseInt(repsText);
+
+            ObservableList<ResultRow> data = calculateResults(weight, reps);
+            calc_tableview.setItems(data);
+        } catch (NumberFormatException e) {
+            // Обработка некорректного ввода
+            calc_tableview.setItems(FXCollections.observableArrayList());
+        }
+    }
+
+    private ObservableList<ResultRow> calculateResults(double weight, int reps) {
+        ObservableList<ResultRow> data = FXCollections.observableArrayList();
+
+        // Расчет одноповторного максимума
+        double brzyckiMax = weight / (1.0278 - 0.0278 * reps);
+        double epleyMax = weight * (1 + 0.0333 * reps);
+        double landerMax = (100 * weight) / (101.3 - 2.67123 * reps);
+        double oconnerMax = weight * (1 + 0.025 * reps);
+
+        // Добавление строки с одноповторным максимумом
+        data.add(new ResultRow("Одноповторный максимум", format(brzyckiMax), format(epleyMax), format(landerMax), format(oconnerMax)));
+
+        // Проценты и диапазоны повторений
+        double[][] ranges = {
+                {50, 38, 49}, {55, 30, 37}, {60, 26, 29}, {65, 18, 25},
+                {70, 12, 17}, {75, 10, 11}, {80, 8, 9}, {85, 6, 7},
+                {90, 4, 5}, {95, 2, 3}
+        };
+
+        for (double[] range : ranges) {
+            double percent = range[0] / 100;
+            String repsRange = (int) range[1] + " - " + (int) range[2];
+            data.add(new ResultRow(
+                    repsRange,
+                    format(brzyckiMax * percent),
+                    format(epleyMax * percent),
+                    format(landerMax * percent),
+                    format(oconnerMax * percent)
+            ));
+        }
+
+        return data;
+    }
+
+    private String format(double value) {
+        return String.format("%.2f", value);
+    }
+
+
+    private void
+    loadArticles(ArticleRepository repository) {
+        List<Article> articles = repository.getAllArticles();
+        ObservableList<Article> articleList = FXCollections.observableArrayList(articles);
+        articles_tableview.setItems(articleList);
+    }
+
+    private void showCreateArticlePane() {
+        create_article_anchorpane.setVisible(true);
+
+    }
+
+    private void showArticlePane(Article article) {
+        articles_anchorpane.setVisible(false);
+        article_view_pane.setVisible(true);
+    }
+
+
+    private void showArticleDetails(Article article) {
+        // Устанавливаем данные выбранной статьи
+        article_title_label.setText(article.getTitle());
+        article_content_webview.getEngine().loadContent(article.getContent());
+        article_date_label.setText(article.getDate().toString());
+
+        // Показываем панель просмотра статьи
+        article_view_pane.setVisible(true);
+    }
+
+    private void closeArticleView() {
+        // Скрываем панель просмотра статьи
+        article_view_pane.setVisible(false);
+    }
+
+
+
+
+    private void showOnlyPane(Pane visiblePane) {
+        for (Pane pane : panes) {
+            pane.setVisible(pane == visiblePane);
+        }
+    }
 }
-
-
