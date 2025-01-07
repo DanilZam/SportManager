@@ -63,6 +63,11 @@ public class AuthorizationController {
     public void initialize() {
         signUpPane.setVisible(false);
 
+        //delete
+        signin_username_field.setText("danil2");
+        signin_password_field.setText("1234");
+        //
+
         signInButton.setOnAction(event -> {
             signInButton.getStyleClass().removeAll("def_button", "pressed_button");
             signInButton.getStyleClass().add("pressed_button");

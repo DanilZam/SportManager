@@ -299,6 +299,9 @@ public class MainController {
     @FXML
     public Button cancel_change_nickname_button;
 
+    @FXML
+    public ImageView user_image_imageview;
+
 
 
     @FXML
@@ -317,6 +320,8 @@ public class MainController {
                 settings_tabpane
         );
 
+        List<Button> buttons = List.of(trainings_button, exercises_button, calculators_button, articles_button);
+
         user_label.setText(user.getNickname());
 
         String pathSVG = loader.getStyleStr("settings.svg");
@@ -329,17 +334,20 @@ public class MainController {
         }
 
 
-        person_imageview.setImage(new Image(getClass().getResource("/assets/user.png").toExternalForm()));
-
+        person_imageview.setImage(new Image(getClass().getResource("/assets/berserk.jpg").toExternalForm()));
+        user_image_imageview.setImage(new Image(getClass().getResource("/assets/berserk.jpg").toExternalForm()));
 
         article_content_webview.setMouseTransparent(true);
 
         loadTrainingsToTableView(trainings_tableview);
         originalData.addAll(trainings_tableview.getItems());
+        trainings_tableview.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         exit_newtrain_button.setOnAction(event -> exitNewTrain());
 
         exercises_tableview.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        articles_tableview.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        calc_tableview.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         start_datepicker.setOnAction(event -> applyFilters());
         end_datepicker.setOnAction(event -> applyFilters());
@@ -364,6 +372,7 @@ public class MainController {
 
         create_article_button.setOnAction(event -> showCreateArticlePane());
         articles_button.setOnAction(event -> {
+            updateButtonStyles(articles_button, buttons);
             ArticleRepository articleRepository = new ArticleRepository(CONNECTION_URL, DB_NAME, ARTICLES_COLLECTION);
 
             showOnlyPane(articles_anchorpane);
@@ -444,9 +453,11 @@ public class MainController {
         trainings_button.setOnAction(event -> {
             showOnlyPane(trainings_anchorpane);
             loadTrainingsToTableView(trainings_tableview);
+            updateButtonStyles(trainings_button, buttons);
         });
 
         exercises_button.setOnAction(event -> {
+            updateButtonStyles(exercises_button, buttons);
             showOnlyPane(exercises_anchorpane);
 
             ExerciseRepository exerciseRepository = new ExerciseRepository(CONNECTION_URL, DB_NAME, EXERCISES_COLLECTION);
@@ -481,7 +492,7 @@ public class MainController {
         });
 
         add_train_button.setOnAction(event -> {
-            newtarin_anchorpane.setStyle("-fx-background-color: white; -fx-border-color: gray; -fx-border-width: 1;");
+
             newtarin_anchorpane.setVisible(true);
             newtarin_anchorpane.toFront();
             create_train_button.setVisible(false);
@@ -520,7 +531,10 @@ public class MainController {
         });
 
 
-        calculators_button.setOnAction(event -> showOnlyPane(calculator_anchorpane));
+        calculators_button.setOnAction(event -> {
+            updateButtonStyles(calculators_button, buttons);
+            showOnlyPane(calculator_anchorpane);
+        });
 
         add_newarticle_button.setOnAction(event -> {
             saveArticle();
@@ -1150,6 +1164,22 @@ public class MainController {
     private void showOnlyPane(Pane visiblePane) {
         for (Region pane : panes) {
             pane.setVisible(pane == visiblePane);
+        }
+    }
+
+    public void updateButtonStyles(Button chosenButton, List<Button> allButtons) {
+        for (Button button : allButtons) {
+            if (button.equals(chosenButton)) {
+                button.getStyleClass().removeAll("not_chosen_button");
+                if (!button.getStyleClass().contains("chosen_button")) {
+                    button.getStyleClass().add("chosen_button");
+                }
+            } else {
+                button.getStyleClass().removeAll("chosen_button");
+                if (!button.getStyleClass().contains("not_chosen_button")) {
+                    button.getStyleClass().add("not_chosen_button");
+                }
+            }
         }
     }
 }

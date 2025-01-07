@@ -4,18 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ef65de43-5e20-4fd6-a02d-59361be6933e" name="Changes" comment="debugging">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/SVGLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/settings.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/user.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/styles/main.css" afterDir="false" />
+    <list default="true" id="ef65de43-5e20-4fd6-a02d-59361be6933e" name="Changes" comment="minimal functionality implemented">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/berserk.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/controllers/AuthorizationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/controllers/AuthorizationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/controllers/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/repositories/TrainingRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/repositories/TrainingRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/app/sportmanager/repositories/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/person.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/person.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/main-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/main.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,7 +169,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736034906631</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="minimal functionality implemented">
+      <option name="closed" value="true" />
+      <created>1736263309871</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1736263309871</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -199,6 +202,7 @@
     <MESSAGE value="Exercises list add" />
     <MESSAGE value="Training module" />
     <MESSAGE value="debugging" />
-    <option name="LAST_COMMIT_MESSAGE" value="debugging" />
+    <MESSAGE value="minimal functionality implemented" />
+    <option name="LAST_COMMIT_MESSAGE" value="minimal functionality implemented" />
   </component>
 </project>

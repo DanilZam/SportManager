@@ -1,5 +1,5 @@
 .user_icon_pane{
-    -fx-background-color: red;
+    -fx-background-color: rgb(110, 110, 110);
 }
 
 .icon{
@@ -7,3 +7,238 @@
     -fx-size: 100 100;
     -fx-preserve-ratio: true;
 }
+
+.left_panel{
+    -fx-background-color: rgb(110, 110, 110);
+}
+
+.chosen_button{
+    -fx-background-color: rgb(136, 138, 134);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+}
+
+.not_chosen_button{
+    -fx-background-color: rgb(110, 110, 110);
+    -fx-text-fill: rgb(190, 190, 190);
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+
+}
+
+.nickname_label{
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+}
+
+.main_borderpane{
+    -fx-background-color: rgb(140, 140, 140);
+}
+
+StackPane Label{
+    -fx-text-fill: white;
+        -fx-font-size: 14px;
+        -fx-font-family: "Arial";
+        -fx-font-weight: bold;
+}
+
+StackPane Button{
+    -fx-background-color: rgb(125, 125, 125);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-border-width: 2px;
+    -fx-border-color: rgb(160, 160, 160);
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+StackPane Button:hover{
+    -fx-background-color: rgb(190, 190, 190);
+    -fx-border-color: rgb(170, 170, 170);
+
+}
+
+StackPane Button:pressed{
+    -fx-background-color: rgb(105, 105, 105);
+    -fx-text-fill: rgb(220, 220, 220);
+    -fx-border-color: rgb(150, 150, 150);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.4, 0, 0);
+}
+
+TextField{
+    -fx-background-color: rgb(220, 220, 220);
+    -fx-border-width: 2px;
+    -fx-border-color: rgb(170, 170, 170);
+    -fx-border-radius: 5px;
+    -fx-background-radius: 7px;
+    -fx-font-size: 13px;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+}
+
+TextField:focused{
+    -fx-background-color: rgb(230, 230, 230);
+    -fx-border-color: rgb(100, 100, 100);
+}
+
+DatePicker{
+    -fx-background-color: rgb(220, 220, 220);
+    -fx-border-width: 2px;
+    -fx-border-color: rgb(170, 170, 170);
+    -fx-border-radius: 4px;
+    -fx-background-radius: 7px;
+    -fx-font-size: 13px;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+}
+DatePicker Label{
+    -fx-text-fill: black;
+}
+
+DatePicker .text-field{
+    -fx-background-color: rgb(220, 220, 220);
+}
+
+DatePicker .text-field:focused{
+    -fx-background-color: rgb(230, 230, 230);
+}
+
+DatePicker:focused{
+    -fx-background-color: rgb(230, 230, 230);
+    -fx-border-color: rgb(100, 100, 100);
+}
+
+.spinners{
+    -fx-background-color: rgb(220, 220, 220);
+        -fx-border-width: 2px;
+        -fx-border-color: rgb(170, 170, 170);
+        -fx-border-radius: 4px;
+        -fx-background-radius: 7px;
+        -fx-font-size: 13px;
+        -fx-font-family: "Arial";
+        -fx-font-weight: bold;
+        -fx-text-fill: black;
+}
+
+.spinners .text-field{
+    -fx-background-color: rgb(220, 220, 220);
+}
+
+.spinners .text-field:focused{
+    -fx-background-color: rgb(230, 230, 230);
+}
+
+.spinners:focused{
+    -fx-background-color: rgb(230, 230, 230);
+    -fx-border-color: rgb(100, 100, 100);
+}
+
+
+.tableviews {
+    -fx-background-color: transparent; /* Фон таблицы */
+    -fx-border-color: #ccc; /* Граница всей таблицы */
+    -fx-border-width: 1px;
+}
+
+.tableviews .table-row-cell {
+    -fx-border-color: rgb(140, 140, 140); /* Цвет разделителей строк */
+    -fx-border-width: 0 0 2px 0; /* Горизонтальная линия между строками */
+    -fx-padding: 10px 0;
+}
+
+.tableviews .table-row-cell:odd {
+    -fx-background-color: rgb(190, 190, 190); /* Черновой фон для нечетных строк */
+}
+
+.tableviews .table-row-cell:even {
+    -fx-background-color: rgb(220, 220, 220); /* Фон для четных строк */
+}
+
+/* Добавляем стили для ячеек */
+.tableviews .table-cell {
+    -fx-text-fill: black; /* Цвет текста в ячейках */
+}
+
+/* Стили для выделенной строки */
+.tableviews .table-row-cell:selected {
+    -fx-background-color: rgb(195,181,212); /* Цвет фона при выделении */
+    -fx-text-fill: black; /* Цвет текста при выделении */
+}
+
+.tableviews .table-row-cell:selected:focused {
+    -fx-text-fill: black; /* Цвет текста при выделении и фокусе */
+}
+
+.tableviews .table-row-cell:focused {
+    -fx-text-fill: black; /* Цвет текста при фокусе */
+}
+
+/* Дополнительно: настройка стилей для фокуса и выделения ячеек */
+.tableviews .table-cell:selected {
+    -fx-text-fill: black; /* Цвет текста в выделенной ячейке */
+    -fx-background-color: #4682b4; /* Цвет фона в выделенной ячейке */
+}
+
+.tableviews .table-cell:focused {
+    -fx-text-fill: black; /* Цвет текста при фокусе на ячейке */
+}
+
+.tableviews .column-header {
+    -fx-background-color: rgb(110, 110, 110); /* Цвет фона заголовков */
+    -fx-text-fill: white; /* Цвет текста заголовков */
+    -fx-font-size: 14px; /* Размер шрифта заголовков */
+    -fx-font-weight: bold; /* Жирный шрифт */
+    -fx-padding: 10px; /* Отступы */
+}
+
+.mini_pane{
+    -fx-background-color: rgb(125, 125, 125);
+    -fx-border-width: 2px;
+    -fx-border-color: rgb(160, 160, 160);
+    -fx-border-radius: 10px;
+    -fx-background-radius: 15px;
+
+}
+
+TextArea{
+    -fx-background-color: rgb(220, 220, 220);
+    -fx-border-width: 2px;
+    -fx-border-color: rgb(170, 170, 170);
+    -fx-border-radius: 5px;
+    -fx-background-radius: 7px;
+    -fx-font-size: 13px;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+}
+
+TextArea:focused{
+    -fx-background-color: rgb(230, 230, 230);
+    -fx-border-color: rgb(100, 100, 100);
+}
+
+
+PasswordField{
+    -fx-background-color: rgb(220, 220, 220);
+    -fx-border-width: 2px;
+    -fx-border-color: rgb(170, 170, 170);
+    -fx-border-radius: 5px;
+    -fx-background-radius: 7px;
+    -fx-font-size: 13px;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+}
+
+PasswordField:focused{
+    -fx-background-color: rgb(230, 230, 230);
+    -fx-border-color: rgb(100, 100, 100);
+}
+
+

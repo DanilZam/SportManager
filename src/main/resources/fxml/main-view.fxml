@@ -24,15 +24,15 @@
 <?import javafx.scene.web.HTMLEditor?>
 <?import javafx.scene.web.WebView?>
 
-<BorderPane fx:id="main_borderpane" prefHeight="858.0" prefWidth="1268.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.sportmanager.controllers.MainController">
+<BorderPane fx:id="main_borderpane" prefHeight="858.0" prefWidth="1268.0" styleClass="main_borderpane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.app.sportmanager.controllers.MainController">
    <left>
-      <VBox fx:id="left_panel_vbox" prefHeight="858.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="left_panel_vbox" prefHeight="858.0" prefWidth="200.0" styleClass="left_panel" BorderPane.alignment="CENTER">
          <children>
             <Pane fx:id="user_icon_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" styleClass="user_icon_pane">
                <children>
                   <ImageView fx:id="person_imageview" fitHeight="150.0" fitWidth="150.0" layoutX="25.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
                </children></Pane>
-            <Label fx:id="user_label" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="200.0" text="Label" textAlignment="CENTER">
+            <Label fx:id="user_label" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="200.0" styleClass="nickname_label" text="Label" textAlignment="CENTER">
                <font>
                   <Font name="Arial Black" size="12.0" />
                </font>
@@ -42,22 +42,22 @@
                   <Insets bottom="100.0" left="15.0" right="15.0" top="10.0" />
                </VBox.margin>
             </Separator>
-            <Button fx:id="trainings_button" mnemonicParsing="false" prefWidth="180.0" text="Мои тренировки">
+            <Button fx:id="trainings_button" mnemonicParsing="false" prefWidth="180.0" styleClass="chosen_button" text="Мои тренировки">
                <VBox.margin>
                   <Insets left="10.0" top="5.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="exercises_button" mnemonicParsing="false" prefWidth="180.0" text="Упражнения">
+            <Button fx:id="exercises_button" mnemonicParsing="false" prefWidth="180.0" styleClass="not_chosen_button" text="Упражнения">
                <VBox.margin>
                   <Insets left="10.0" top="5.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="calculators_button" mnemonicParsing="false" prefWidth="180.0" text="Калькуляторы">
+            <Button fx:id="calculators_button" mnemonicParsing="false" prefWidth="180.0" styleClass="not_chosen_button" text="Калькуляторы">
                <VBox.margin>
                   <Insets left="10.0" top="5.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="articles_button" mnemonicParsing="false" prefWidth="180.0" text="Статьи">
+            <Button fx:id="articles_button" mnemonicParsing="false" prefWidth="180.0" styleClass="not_chosen_button" text="Статьи">
                <VBox.margin>
                   <Insets left="10.0" top="5.0" />
                </VBox.margin>
@@ -81,7 +81,7 @@
             <AnchorPane fx:id="exercises_anchorpane" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
                   <Label layoutX="495.0" layoutY="32.0" text="Упражнения" />
-                  <TableView fx:id="exercises_tableview" layoutX="5.0" layoutY="181.0" prefHeight="617.0" prefWidth="948.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="181.0">
+                  <TableView fx:id="exercises_tableview" layoutX="5.0" layoutY="181.0" prefHeight="617.0" prefWidth="948.0" styleClass="tableviews" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="181.0">
                     <columns>
                       <TableColumn fx:id="name_column" text="Наименование" />
                       <TableColumn fx:id="musclegroups_columns" text="Мышечные группы" />
@@ -90,14 +90,14 @@
                   <Label layoutX="271.0" layoutY="107.0" text="По названию:" />
                   <Label layoutX="550.0" layoutY="108.0" text="По мышечной группе:" />
                   <Button fx:id="search_exercises_button" layoutX="198.0" layoutY="101.0" mnemonicParsing="false" text="Поиск" />
-                  <TextField fx:id="exercises_search_textfield" layoutX="364.0" layoutY="104.0" AnchorPane.leftAnchor="364.0" />
-                  <TextField fx:id="muscles_search_textfield" layoutX="694.0" layoutY="104.0" AnchorPane.leftAnchor="694.0" />
+                  <TextField fx:id="exercises_search_textfield" layoutX="371.0" layoutY="104.0" AnchorPane.leftAnchor="371.0" />
+                  <TextField fx:id="muscles_search_textfield" layoutX="713.0" layoutY="103.0" AnchorPane.leftAnchor="713.0" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="trainings_anchorpane" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
-                  <Button fx:id="add_train_button" layoutX="112.0" layoutY="202.0" mnemonicParsing="false" text="Добавить тренировку" />
-                  <TableView fx:id="trainings_tableview" layoutX="112.0" layoutY="232.0" prefHeight="583.0" prefWidth="827.0">
+                  <Button fx:id="add_train_button" layoutX="112.0" layoutY="196.0" mnemonicParsing="false" styleClass="add_train_button" text="Добавить тренировку" />
+                  <TableView fx:id="trainings_tableview" layoutX="112.0" layoutY="232.0" prefHeight="583.0" prefWidth="827.0" styleClass="tableviews">
                     <columns>
                       <TableColumn fx:id="train_name_column" prefWidth="77.0" text="Наименование" />
                       <TableColumn fx:id="train_date_column" prefWidth="73.0" text="Дата" />
@@ -109,22 +109,22 @@
                   <DatePicker fx:id="start_datepicker" layoutX="759.0" layoutY="78.0" />
                   <Label layoutX="739.0" layoutY="134.0" text="по" />
                   <DatePicker fx:id="end_datepicker" layoutX="759.0" layoutY="130.0" />
-                  <TextField fx:id="search_train_name_textfield" layoutX="303.0" layoutY="75.0" prefHeight="32.0" prefWidth="293.0" />
+                  <TextField fx:id="search_train_name_textfield" layoutX="334.0" layoutY="75.0" prefHeight="32.0" prefWidth="293.0" />
                   <Label layoutX="216.0" layoutY="82.0" text="По названию:" />
-                  <TextField fx:id="search_train_muscle_textfield" layoutX="354.0" layoutY="127.0" prefHeight="32.0" prefWidth="249.0" />
+                  <TextField fx:id="search_train_muscle_textfield" layoutX="391.0" layoutY="127.0" prefHeight="32.0" prefWidth="249.0" />
                   <Label layoutX="216.0" layoutY="134.0" text="По мышечной группе:" />
                   <Label layoutX="216.0" layoutY="57.0" text="Поиск:" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="calculator_anchorpane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" visible="false">
+            <AnchorPane fx:id="calculator_anchorpane" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
                   <Label layoutX="253.0" layoutY="63.0" text="Вес" />
                   <Label layoutX="579.0" layoutY="63.0" text="Количество повторений" />
                   <ScrollPane fx:id="calc_scrollpane" fitToWidth="true" layoutX="153.0" layoutY="154.0" prefHeight="599.0" prefWidth="776.0">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="597.0" prefWidth="774.0">
                            <children>
-                              <TableView fx:id="calc_tableview" prefHeight="399.0" prefWidth="751.0">
+                              <TableView fx:id="calc_tableview" prefHeight="596.0" prefWidth="773.0" styleClass="tableviews">
                                 <columns>
                                   <TableColumn fx:id="repsColumn" prefWidth="75.0" text="Количество повторений" />
                                   <TableColumn fx:id="brzyckiColumn" prefWidth="75.0" text="Matt Brzycki" />
@@ -137,14 +137,14 @@
                         </AnchorPane>
                     </content>
                   </ScrollPane>
-                  <Spinner fx:id="weight_spinner" editable="true" layoutX="253.0" layoutY="88.0" />
-                  <Spinner fx:id="reps_spinner" editable="true" layoutX="580.0" layoutY="88.0" />
+                  <Spinner fx:id="weight_spinner" editable="true" layoutX="253.0" layoutY="88.0" styleClass="spinners" />
+                  <Spinner fx:id="reps_spinner" editable="true" layoutX="580.0" layoutY="88.0" styleClass="spinners" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="articles_anchorpane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" visible="false">
+            <AnchorPane fx:id="articles_anchorpane" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
                   <Button fx:id="create_article_button" layoutX="76.0" layoutY="51.0" mnemonicParsing="false" text="Создать статью" />
-                  <TableView fx:id="articles_tableview" layoutX="76.0" layoutY="187.0" prefHeight="592.0" prefWidth="928.0">
+                  <TableView fx:id="articles_tableview" layoutX="76.0" layoutY="187.0" prefHeight="592.0" prefWidth="928.0" styleClass="tableviews">
                     <columns>
                       <TableColumn fx:id="article_name_column" prefWidth="363.0" text="Название статьи" />
                       <TableColumn fx:id="article_date_column" prefWidth="225.0" text="Дата создания" />
@@ -152,7 +152,7 @@
                   </TableView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="article_view_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: white;" visible="false">
+            <AnchorPane fx:id="article_view_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" styleClass="mini_pane" visible="false">
                <children>
                   <Label fx:id="article_title_label" layoutX="53.0" layoutY="36.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="71.0" prefWidth="794.0" text="Title" textAlignment="CENTER">
                      <font>
@@ -162,19 +162,19 @@
                   <Label fx:id="article_date_label" layoutX="53.0" layoutY="647.0" text="Date" />
                   <Button fx:id="close_view_button" layoutX="779.0" layoutY="641.0" mnemonicParsing="false" text="Закрыть" />
                   <WebView fx:id="article_content_webview" layoutX="53.0" layoutY="99.0" prefHeight="531.0" prefWidth="794.0" />
-                  <Button fx:id="edit_article_button" layoutX="582.0" layoutY="641.0" mnemonicParsing="false" text="Редактировать" />
-                  <Button fx:id="delete_article_button" layoutX="702.0" layoutY="641.0" mnemonicParsing="false" text="Удалить" />
+                  <Button fx:id="edit_article_button" layoutX="552.0" layoutY="641.0" mnemonicParsing="false" text="Редактировать" />
+                  <Button fx:id="delete_article_button" layoutX="693.0" layoutY="641.0" mnemonicParsing="false" text="Удалить" />
                </children></AnchorPane>
-            <AnchorPane fx:id="create_article_anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: white;" visible="false">
+            <AnchorPane fx:id="create_article_anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" styleClass="mini_pane" visible="false">
                <children>
                   <HTMLEditor fx:id="article_htmleditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="7.0" layoutY="50.0" prefHeight="556.0" prefWidth="887.0" />
-                  <Button fx:id="add_newarticle_button" layoutX="670.0" layoutY="639.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="138.0" text="Добавить статью" />
+                  <Button fx:id="add_newarticle_button" layoutX="623.0" layoutY="639.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="162.0" text="Добавить статью" />
                   <Label layoutX="126.0" layoutY="21.0" text="Название статьи:" />
-                  <TextField fx:id="article_title_textfield" layoutX="243.0" layoutY="17.0" prefHeight="26.0" prefWidth="444.0" />
-                  <Button fx:id="exit_create_article_pane" layoutX="818.0" layoutY="639.0" mnemonicParsing="false" text="Закрыть" />
+                  <TextField fx:id="article_title_textfield" layoutX="253.0" layoutY="17.0" prefHeight="26.0" prefWidth="444.0" />
+                  <Button fx:id="exit_create_article_pane" layoutX="802.0" layoutY="639.0" mnemonicParsing="false" text="Закрыть" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="article_edit_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: white;" visible="false">
+            <AnchorPane fx:id="article_edit_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" styleClass="mini_pane">
                <children>
                   <TextField fx:id="edit_article_title_field" layoutX="144.0" layoutY="26.0" prefHeight="26.0" prefWidth="717.0" />
                   <Label layoutX="28.0" layoutY="31.0" text="Название статьи:" />
@@ -183,16 +183,16 @@
                   <Button fx:id="cancel_edit_button" layoutX="795.0" layoutY="650.0" mnemonicParsing="false" text="Закрыть" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="newtarin_anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="600.0" visible="false">
+            <AnchorPane fx:id="newtarin_anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="600.0" styleClass="mini_pane" visible="false">
                <children>
                   <ScrollPane fitToWidth="true" layoutX="50.0" layoutY="177.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefViewportHeight="460.0" prefViewportWidth="500.0" prefWidth="500.0">
                      <content>
                         <VBox fx:id="newtrain_vbox" />
                      </content>
                   </ScrollPane>
-                  <Button fx:id="create_train_button" layoutX="325.0" layoutY="539.0" mnemonicParsing="false" text="Создать тренировку" />
+                  <Button fx:id="create_train_button" layoutX="307.0" layoutY="539.0" mnemonicParsing="false" text="Создать тренировку" />
                   <DatePicker fx:id="train_date_datepicker" layoutX="370.0" layoutY="27.0" />
-                  <Label layoutX="270.0" layoutY="31.0" text="Выберите дату" />
+                  <Label layoutX="260.0" layoutY="31.0" text="Выберите дату" />
                   <TextArea fx:id="train_description_textarea" layoutX="50.0" layoutY="67.0" prefHeight="71.0" prefWidth="500.0" promptText="Введите наименование тренировки (её краткое описание)" />
                   <Button fx:id="exit_newtrain_button" layoutX="482.0" layoutY="539.0" mnemonicParsing="false" text="Закрыть" />
                   <Button fx:id="add_newexcercise_button" layoutX="50.0" layoutY="147.0" mnemonicParsing="false" text="Добавить упражнение" />
@@ -202,19 +202,19 @@
               <tabs>
                 <Tab fx:id="user_tab" text="Аккаунт">
                   <content>
-                    <AnchorPane fx:id="user_acc_anchorpane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
+                    <AnchorPane fx:id="user_acc_anchorpane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="mini_pane">
                            <children>
                               <TextField fx:id="nickname_textfield" layoutX="73.0" layoutY="281.0" prefHeight="26.0" prefWidth="224.0" />
                               <Button fx:id="change_nickname_button" layoutX="315.0" layoutY="279.0" mnemonicParsing="false" text="Сменить имя" />
                               <Button fx:id="chang_pass_button" layoutX="315.0" layoutY="358.0" mnemonicParsing="false" text="Сменить пароль" />
                               <ImageView fx:id="user_image_imageview" fitHeight="180.0" fitWidth="180.0" layoutX="175.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" />
-                              <Label fx:id="trains_amount_label" layoutX="249.0" layoutY="233.0" text="Label" />
-                              <Button fx:id="exit_settings1" layoutX="468.0" layoutY="16.0" mnemonicParsing="false" text="Закрыть" />
+                              <Label fx:id="trains_amount_label" layoutX="211.0" layoutY="235.0" text="Label" />
+                              <Button fx:id="exit_settings1" layoutX="451.0" layoutY="16.0" mnemonicParsing="false" text="Закрыть" />
                               <Button fx:id="exit_main_button" layoutX="430.0" layoutY="526.0" mnemonicParsing="false" text="Выйти" />
                               <Button fx:id="delete_user_button" layoutX="107.0" layoutY="529.0" mnemonicParsing="false" text="Удалить" />
-                              <Button fx:id="cancel_change_nickname_button" layoutX="427.0" layoutY="279.0" mnemonicParsing="false" text="Отмена" />
+                              <Button fx:id="cancel_change_nickname_button" layoutX="439.0" layoutY="279.0" mnemonicParsing="false" text="Отмена" />
                               <Button fx:id="accept_newnickname_button" layoutX="315.0" layoutY="279.0" mnemonicParsing="false" text="Подтвердить" />
-                              <Button fx:id="cancel_change_pass_button" layoutX="427.0" layoutY="358.0" mnemonicParsing="false" text="Отмена" />
+                              <Button fx:id="cancel_change_pass_button" layoutX="439.0" layoutY="358.0" mnemonicParsing="false" text="Отмена" />
                               <Button fx:id="accept_newpass_button" layoutX="315.0" layoutY="358.0" mnemonicParsing="false" text="Подтвердить" />
                               <PasswordField fx:id="newpass_field" layoutX="73.0" layoutY="361.0" prefHeight="26.0" prefWidth="222.0" />
                               <PasswordField fx:id="accept_newpass_field" layoutX="74.0" layoutY="405.0" prefHeight="26.0" prefWidth="222.0" />
