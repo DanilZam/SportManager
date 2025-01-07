@@ -4,33 +4,48 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.SVGPath;
+import javafx.scene.transform.Scale;
 import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
+import org.app.sportmanager.SVGLoader;
 import org.app.sportmanager.UserSession;
 import org.app.sportmanager.fx_nodes.ResultRow;
 import org.app.sportmanager.fx_nodes.TrainingTableRow;
 import org.app.sportmanager.models.Article;
 import org.app.sportmanager.models.Exercise;
 import org.app.sportmanager.models.Training;
+import org.app.sportmanager.models.User;
 import org.app.sportmanager.repositories.ArticleRepository;
 import org.app.sportmanager.repositories.ExerciseRepository;
 import org.app.sportmanager.repositories.TrainingRepository;
+import org.app.sportmanager.repositories.UserRepository;
 
 
-
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class MainController {
 
+    private User user;
 
     private final String CONNECTION_URL = "mongodb://localhost:27017";
     private final String DB_NAME = "sportmanager";
@@ -39,10 +54,11 @@ public class MainController {
     private final String ARTICLES_COLLECTION = "articles";
 
     private ObservableList<TrainingTableRow> originalData = FXCollections.observableArrayList();
+    SVGLoader loader = new SVGLoader();
 
     private Article selectedArticle;
 
-    private List<Pane> panes;
+    private List<Region> panes;
 
     private boolean changesSaved = false;
 
@@ -113,7 +129,7 @@ public class MainController {
     public TableView<TrainingTableRow> trainings_tableview;
 
     @FXML
-    public Region user_icon_region;
+    public Pane user_icon_pane;
 
     @FXML
     public Label user_label;
@@ -149,10 +165,7 @@ public class MainController {
     public AnchorPane calculator_anchorpane;
 
     @FXML
-    public TextField weight_textfield;
-
-    @FXML
-    public TextField reps_textfield;
+    public Spinner<Integer> reps_spinner;
 
     @FXML
     public TableView<ResultRow> calc_tableview;
@@ -234,9 +247,64 @@ public class MainController {
     @FXML
     public Button exit_create_article_pane;
 
+    @FXML
+    public Spinner<Double> weight_spinner;
+
+    @FXML
+    public Button exit_newtrain_button;
+
+    @FXML
+    public ImageView person_imageview;
+
+
+    @FXML
+    public TabPane settings_tabpane;
+    @FXML
+    public Button exit_settings1;
+
+    @FXML
+    public Button change_nickname_button;
+
+    @FXML
+    public Button chang_pass_button;
+
+    @FXML
+    public Button accept_newpass_button;
+
+    @FXML
+    public Button cancel_change_pass_button;
+
+    @FXML
+    public PasswordField newpass_field;
+
+    @FXML
+    public PasswordField accept_newpass_field;
+
+
+    @FXML
+    public Button delete_user_button;
+
+    @FXML
+    public Button exit_main_button;
+
+    @FXML
+    public TextField nickname_textfield;
+
+    @FXML
+    public Label trains_amount_label;
+
+    @FXML
+    public Button accept_newnickname_button;
+
+    @FXML
+    public Button cancel_change_nickname_button;
+
+
 
     @FXML
     public void initialize() {
+        user = UserSession.getInstance().getCurrentUser();
+
         panes = Arrays.asList(
                 trainings_anchorpane,
                 newtarin_anchorpane,
@@ -245,13 +313,31 @@ public class MainController {
                 article_view_pane,
                 articles_anchorpane,
                 create_article_anchorpane,
-                article_edit_pane
+                article_edit_pane,
+                settings_tabpane
         );
 
-        newtarin_anchorpane.toFront();
+        user_label.setText(user.getNickname());
+
+        String pathSVG = loader.getStyleStr("settings.svg");
+        if (pathSVG != null) {
+            settings_button.setStyle(STR."-fx-shape: \"\{pathSVG}\"");
+            //user_icon_region.setStyle(svgStyle);
+        } else {
+            System.out.println("Set string");
+            settings_button.setText("Настройки");
+        }
+
+
+        person_imageview.setImage(new Image(getClass().getResource("/assets/user.png").toExternalForm()));
+
+
+        article_content_webview.setMouseTransparent(true);
 
         loadTrainingsToTableView(trainings_tableview);
         originalData.addAll(trainings_tableview.getItems());
+
+        exit_newtrain_button.setOnAction(event -> exitNewTrain());
 
         exercises_tableview.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
@@ -269,7 +355,10 @@ public class MainController {
         articles_anchorpane.setVisible(false);
         create_article_anchorpane.setVisible(false);
         article_edit_pane.setVisible(false);
+        settings_tabpane.setVisible(false);
 
+        weight_spinner.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(0.0, 999.0, 30.0, 1.0));
+        reps_spinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 999, 8, 1));
 
         exit_create_article_pane.setOnAction(event -> exitCreateArticle());
 
@@ -394,7 +483,7 @@ public class MainController {
         add_train_button.setOnAction(event -> {
             newtarin_anchorpane.setStyle("-fx-background-color: white; -fx-border-color: gray; -fx-border-width: 1;");
             newtarin_anchorpane.setVisible(true);
-
+            newtarin_anchorpane.toFront();
             create_train_button.setVisible(false);
         });
 
@@ -415,25 +504,245 @@ public class MainController {
         oconnerColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getOconner()));
 
         // Добавление слушателя для обновления таблицы при изменении значений
-        weight_textfield.textProperty().addListener((obs, oldText, newText) -> updateTable());
-        reps_textfield.textProperty().addListener((obs, oldText, newText) -> updateTable());
+        weight_spinner.valueProperty().addListener((obs, oldVal, newVal) -> updateTable());
+        reps_spinner.valueProperty().addListener((obs, oldVal, newVal) -> updateTable());
+
+        weight_spinner.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) { // Если введённое значение содержит не цифры
+                weight_spinner.getEditor().setText(oldValue); // Возвращаем предыдущее корректное значение
+            }
+        });
+
+        reps_spinner.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) { // Если введённое значение содержит не цифры
+                reps_spinner.getEditor().setText(oldValue); // Возвращаем предыдущее корректное значение
+            }
+        });
+
 
         calculators_button.setOnAction(event -> showOnlyPane(calculator_anchorpane));
 
         add_newarticle_button.setOnAction(event -> {
             saveArticle();
         });
+
+
+        accept_newnickname_button.setVisible(false);
+        cancel_change_nickname_button.setVisible(false);
+        settings_button.setOnAction(event -> settings_tabpane.setVisible(true));
+
+        nickname_textfield.setEditable(false);
+        nickname_textfield.setText(user.getNickname());
+        setUserTrainsAmount();
+
+        change_nickname_button.setOnAction(event -> changeButtons());
+        accept_newnickname_button.setOnAction(event -> changeNickname());
+
+
+        newpass_field.setEditable(false);
+        accept_newpass_field.setVisible(false);
+        accept_newpass_button.setVisible(false);
+        cancel_change_pass_button.setVisible(false);
+
+        chang_pass_button.setOnAction(event -> {
+            chang_pass_button.setVisible(false);
+            newpass_field.setEditable(true);
+            accept_newpass_field.setVisible(true);
+            accept_newpass_button.setVisible(true);
+            cancel_change_pass_button.setVisible(true);
+        });
+        accept_newpass_button.setOnAction(event -> changePassword());
+
+        cancel_change_nickname_button.setOnAction(event -> {
+            nickname_textfield.setText(user.getNickname());
+            nickname_textfield.setEditable(false);
+            accept_newnickname_button.setVisible(false);
+            cancel_change_nickname_button.setVisible(false);
+            change_nickname_button.setVisible(true);
+        });
+
+        cancel_change_pass_button.setOnAction(event -> {
+            newpass_field.setEditable(false);
+            accept_newpass_field.setVisible(false);
+            accept_newpass_button.setVisible(false);
+            cancel_change_pass_button.setVisible(false);
+            chang_pass_button.setVisible(true);
+        });
+
+        exit_settings1.setOnAction(event -> settings_tabpane.setVisible(false));
+
+        exit_main_button.setOnAction(event -> {
+            String result = confirmActionAlert("Выход", "Действительно хотите покинуть учётную запись?");
+            if (result.equals("yes")){
+                openAuth(event);
+            }
+        });
+        delete_user_button.setOnAction(event -> deleteUser(event));
+    }
+
+    private void openAuth(Event event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/authorization-view.fxml"));
+            //Parent root = loader.load();
+
+            // Получаем Stage из события
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(loader.load());
+            String css = this.getClass().getResource("/styles/authorization.css").toExternalForm();
+            scene.getStylesheets().add(css);
+            // Создаем и настраиваем новое окно
+            Stage newStage = new Stage();
+            newStage.setScene(scene);
+            newStage.setTitle("Authorization"); // Заголовок нового окна
+            newStage.show();
+
+            // Закрываем старое окно
+            currentStage.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Open win");
+    }
+
+    private void deleteUser(Event event){
+        String result = confirmActionAlert("Удалить пользователя", "Действительно хотите удалить учётную запись?");
+        if (result.equals("yes")){
+            String result2 = confirmActionAlert("Подтверждение", "Все данные будут удалены без возможности восстановить. Удалить?");
+            if (!result2.equals("yes")){
+                return;
+            }
+        }
+
+        UserRepository repository = new UserRepository();
+        TrainingRepository trainingRepository = new TrainingRepository(CONNECTION_URL, DB_NAME, TRAININGS_COLLECTION);
+
+        if (!repository.deleteUser(user)){
+            showInfoAlert("Ошибка!", "Не удалось удалить учётную запись");
+            return;
+        }
+        if (trainingRepository.deleteTrainingsByUserId(user.getId())){
+            System.out.println("Данные пользователя удалены!");
+        }
+        else{
+            System.out.println("Не удалось удалить данные пользователя " + user.getNickname() + " id: " + user.getId());
+        }
+        openAuth(event);
+    }
+
+    private void changePassword() {
+
+        String newPass = newpass_field.getText();
+        String acceptNewPass = accept_newpass_field.getText();
+
+        if (newPass.length() < 4 || newPass.length() > 50){
+            showInfoAlert("Неверно!", "Пароль должен быть от 4 до 50 символов");
+            return;
+        }
+        if (!newPass.equals(acceptNewPass)){
+            showInfoAlert("Неверно!", "Пароль не подтверждён");
+            return;
+        }
+        UserRepository userRepository = new UserRepository();
+        User newUser = new User(user.getId(), user.getNickname(), newPass);
+
+        if(userRepository.updateUser(newUser)){
+            showInfoAlert("Успешно!", "Пароль обновлён!");
+            user.setPassword(newPass);
+
+            newpass_field.setEditable(false);
+            accept_newpass_field.setVisible(false);
+            accept_newpass_button.setVisible(false);
+            cancel_change_pass_button.setVisible(false);
+            chang_pass_button.setVisible(true);
+        }
+        else {
+            showInfoAlert("Ошибка!", "Не удалось обновить пароль!");
+        }
+    }
+
+    private void changeNickname() {
+
+        String newNickname = nickname_textfield.getText();
+
+        if (newNickname.equals(user.getNickname())){
+            showInfoAlert("Неверно!", "Новый никнейм не должен соответствовать старому!");
+            return;
+        }
+        if (newNickname.length() < 4 || newNickname.length() > 50) {
+            showInfoAlert("Неверно!", "Никнейм должен быть от 4 до 50 символов");
+            return;
+        }
+        UserRepository userRepository = new UserRepository();
+        User newUser = new User(user.getId(), newNickname, user.getPassword());
+        if(userRepository.updateUser(newUser)){
+            showInfoAlert("Успешно!", "Имя обновлено!");
+            user.setNickname(newNickname);
+            nickname_textfield.setText(newNickname);
+            user_label.setText(newNickname);
+            nickname_textfield.setEditable(false);
+
+            accept_newnickname_button.setVisible(false);
+            cancel_change_nickname_button.setVisible(false);
+            change_nickname_button.setVisible(true);
+        }
+        else {
+            showInfoAlert("Ошибка!", "Не удалось обновить имя!");
+        }
+
+    }
+
+    private void changeButtons() {
+
+        nickname_textfield.setEditable(true);
+
+        accept_newnickname_button.setVisible(true);
+        cancel_change_nickname_button.setVisible(true);
+        change_nickname_button.setVisible(false);
+    }
+
+    private void setUserTrainsAmount() {
+        TrainingRepository trainingRepository = new TrainingRepository(CONNECTION_URL, DB_NAME, TRAININGS_COLLECTION);
+        int amount = trainingRepository.getTrainingsByUserId(user.getId()).size();
+        if (amount > 0){
+            trains_amount_label.setText("Количество тренировок: " + amount);
+        }
+        else {
+            trains_amount_label.setText("Ещё нет тренировок");
+        }
+    }
+
+    private void exitNewTrain() {
+        if (!newtrain_vbox.getChildren().isEmpty() || !train_description_textarea.getText().isEmpty()){
+            String result = confirmActionAlert("Выйти?", "Вы действительно хотите завершить создание тренировки? Тренировка не будет сохранена!");
+
+            if (result.equals("yes")) {
+                newtarin_anchorpane.setVisible(false);
+                newtrain_vbox.getChildren().clear();
+                train_description_textarea.setText("");
+                train_date_datepicker.setValue(null);
+                return;
+            }
+        }
+        newtarin_anchorpane.setVisible(false);
+        newtrain_vbox.getChildren().clear();
+        train_description_textarea.setText("");
+        train_date_datepicker.setValue(null);
+
     }
 
     private void exitCreateArticle() {
         String title = edit_article_title_field.getText();
         String articleHTML = edit_article_content_htmleditor.getHtmlText();
-        if (!articleHTML.isEmpty()){
+        if (!articleHTML.matches("(?i).*<body[^>]*>\\s*</body>.*") || !title.isEmpty()){
+            //System.out.println("---------|" + articleHTML + "|---------");
             String result = confirmActionAlert("Выйти?", "Вы действительно хотите выйти? Статья не будет сохранена!");
             if (result.equals("yes")){
                 create_article_anchorpane.setVisible(false);
+                return;
             }
         }
+        create_article_anchorpane.setVisible(false);
     }
 
     private void deleteArticle() {
@@ -555,6 +864,7 @@ public class MainController {
         }
 
         Map<String, List<Integer>> exerciseMap = new HashMap<>();
+
         for (Node node : newtrain_vbox.getChildren()) {
             if (node instanceof VBox exerciseBlock) {
                 ComboBox<String> exerciseComboBox = (ComboBox<String>) exerciseBlock.getChildren().get(0);
@@ -590,13 +900,14 @@ public class MainController {
         }
 
         TrainingRepository trainingRepository = new TrainingRepository(CONNECTION_URL, DB_NAME, TRAININGS_COLLECTION);
-        String userId = String.valueOf(UserSession.getInstance().getCurrentUser().getId());
+        String userId = String.valueOf(user.getId());
         Training newTraining = new Training(UUID.randomUUID().toString(), userId, date, name, exerciseMap);
         trainingRepository.saveTraining(newTraining);
         trainingRepository.close();
 
         showInfoAlert("Успех", "Тренировка успешно сохранена!");
         clearTrainingForm();
+        loadTrainingsToTableView(trainings_tableview);
     }
 
     private void clearTrainingForm() {
@@ -607,7 +918,7 @@ public class MainController {
 
     public void loadTrainingsToTableView(TableView<TrainingTableRow> trainingsTableView) {
         // Получаем текущего пользователя
-        long userId = UserSession.getInstance().getCurrentUser().getId();
+        long userId = user.getId();
 
         TrainingRepository trainingRepository = new TrainingRepository(CONNECTION_URL, DB_NAME, TRAININGS_COLLECTION);
         ExerciseRepository exerciseRepository = new ExerciseRepository(CONNECTION_URL, DB_NAME, EXERCISES_COLLECTION);
@@ -751,13 +1062,10 @@ public class MainController {
     }
 
     private void updateTable() {
-        String weightText = weight_textfield.getText();
-        String repsText = reps_textfield.getText();
+        Double weight = weight_spinner.getValue();
+        int reps = reps_spinner.getValue();
 
         try {
-            double weight = Double.parseDouble(weightText);
-            int reps = Integer.parseInt(repsText);
-
             ObservableList<ResultRow> data = calculateResults(weight, reps);
             calc_tableview.setItems(data);
         } catch (NumberFormatException e) {
@@ -766,7 +1074,7 @@ public class MainController {
         }
     }
 
-    private ObservableList<ResultRow> calculateResults(double weight, int reps) {
+    private ObservableList<ResultRow> calculateResults(Double weight, int reps) {
         ObservableList<ResultRow> data = FXCollections.observableArrayList();
 
         // Расчет одноповторного максимума
@@ -839,10 +1147,8 @@ public class MainController {
     }
 
 
-
-
     private void showOnlyPane(Pane visiblePane) {
-        for (Pane pane : panes) {
+        for (Region pane : panes) {
             pane.setVisible(pane == visiblePane);
         }
     }

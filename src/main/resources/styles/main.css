@@ -1,0 +1,9 @@
+.user_icon_pane{
+    -fx-background-color: red;
+}
+
+.icon{
+    -fx-margin: auto;
+    -fx-size: 100 100;
+    -fx-preserve-ratio: true;
+}

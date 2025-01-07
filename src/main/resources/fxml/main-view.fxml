@@ -4,15 +4,20 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -23,7 +28,10 @@
    <left>
       <VBox fx:id="left_panel_vbox" prefHeight="858.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Region fx:id="user_icon_region" prefHeight="200.0" prefWidth="200.0" />
+            <Pane fx:id="user_icon_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" styleClass="user_icon_pane">
+               <children>
+                  <ImageView fx:id="person_imageview" fitHeight="150.0" fitWidth="150.0" layoutX="25.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
+               </children></Pane>
             <Label fx:id="user_label" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="200.0" text="Label" textAlignment="CENTER">
                <font>
                   <Font name="Arial Black" size="12.0" />
@@ -59,7 +67,7 @@
                   <Insets left="15.0" right="15.0" />
                </VBox.margin>
             </Separator>
-            <Button fx:id="settings_button" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" text="Settings">
+            <Button fx:id="settings_button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0">
                <VBox.margin>
                   <Insets bottom="20.0" left="60.0" top="40.0" />
                </VBox.margin>
@@ -70,23 +78,6 @@
    <center>
       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="newtarin_anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="600.0" visible="false">
-               <children>
-                  <ScrollPane fitToWidth="true" layoutX="50.0" layoutY="152.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="365.0" prefViewportHeight="460.0" prefViewportWidth="500.0" prefWidth="500.0">
-                     <content>
-                        <VBox fx:id="newtrain_vbox">
-                           <children>
-                              <Button fx:id="add_newexcercise_button" mnemonicParsing="false" text="Добавить упражнение" />
-                           </children>
-                        </VBox>
-                     </content>
-                  </ScrollPane>
-                  <Button fx:id="create_train_button" layoutX="444.0" layoutY="538.0" mnemonicParsing="false" text="Создать тренировку" />
-                  <DatePicker fx:id="train_date_datepicker" layoutX="370.0" layoutY="27.0" />
-                  <Label layoutX="270.0" layoutY="31.0" text="Выберите дату" />
-                  <TextArea fx:id="train_description_textarea" layoutX="50.0" layoutY="67.0" prefHeight="71.0" prefWidth="500.0" promptText="Введите наименование тренировки (её краткое описание)" />
-               </children>
-            </AnchorPane>
             <AnchorPane fx:id="exercises_anchorpane" prefHeight="200.0" prefWidth="200.0" visible="false">
                <children>
                   <Label layoutX="495.0" layoutY="32.0" text="Упражнения" />
@@ -128,9 +119,7 @@
             <AnchorPane fx:id="calculator_anchorpane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" visible="false">
                <children>
                   <Label layoutX="253.0" layoutY="63.0" text="Вес" />
-                  <TextField fx:id="weight_textfield" layoutX="253.0" layoutY="88.0" />
                   <Label layoutX="579.0" layoutY="63.0" text="Количество повторений" />
-                  <TextField fx:id="reps_textfield" layoutX="579.0" layoutY="88.0" />
                   <ScrollPane fx:id="calc_scrollpane" fitToWidth="true" layoutX="153.0" layoutY="154.0" prefHeight="599.0" prefWidth="776.0">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
@@ -148,6 +137,8 @@
                         </AnchorPane>
                     </content>
                   </ScrollPane>
+                  <Spinner fx:id="weight_spinner" editable="true" layoutX="253.0" layoutY="88.0" />
+                  <Spinner fx:id="reps_spinner" editable="true" layoutX="580.0" layoutY="88.0" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="articles_anchorpane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" visible="false">
@@ -174,7 +165,7 @@
                   <Button fx:id="edit_article_button" layoutX="582.0" layoutY="641.0" mnemonicParsing="false" text="Редактировать" />
                   <Button fx:id="delete_article_button" layoutX="702.0" layoutY="641.0" mnemonicParsing="false" text="Удалить" />
                </children></AnchorPane>
-            <AnchorPane fx:id="create_article_anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: white;">
+            <AnchorPane fx:id="create_article_anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: white;" visible="false">
                <children>
                   <HTMLEditor fx:id="article_htmleditor" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="7.0" layoutY="50.0" prefHeight="556.0" prefWidth="887.0" />
                   <Button fx:id="add_newarticle_button" layoutX="670.0" layoutY="639.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="138.0" text="Добавить статью" />
@@ -192,6 +183,52 @@
                   <Button fx:id="cancel_edit_button" layoutX="795.0" layoutY="650.0" mnemonicParsing="false" text="Закрыть" />
                </children>
             </AnchorPane>
+            <AnchorPane fx:id="newtarin_anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="600.0" visible="false">
+               <children>
+                  <ScrollPane fitToWidth="true" layoutX="50.0" layoutY="177.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefViewportHeight="460.0" prefViewportWidth="500.0" prefWidth="500.0">
+                     <content>
+                        <VBox fx:id="newtrain_vbox" />
+                     </content>
+                  </ScrollPane>
+                  <Button fx:id="create_train_button" layoutX="325.0" layoutY="539.0" mnemonicParsing="false" text="Создать тренировку" />
+                  <DatePicker fx:id="train_date_datepicker" layoutX="370.0" layoutY="27.0" />
+                  <Label layoutX="270.0" layoutY="31.0" text="Выберите дату" />
+                  <TextArea fx:id="train_description_textarea" layoutX="50.0" layoutY="67.0" prefHeight="71.0" prefWidth="500.0" promptText="Введите наименование тренировки (её краткое описание)" />
+                  <Button fx:id="exit_newtrain_button" layoutX="482.0" layoutY="539.0" mnemonicParsing="false" text="Закрыть" />
+                  <Button fx:id="add_newexcercise_button" layoutX="50.0" layoutY="147.0" mnemonicParsing="false" text="Добавить упражнение" />
+               </children>
+            </AnchorPane>
+            <TabPane fx:id="settings_tabpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="550.0" style="-fx-background-color: white;" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab fx:id="user_tab" text="Аккаунт">
+                  <content>
+                    <AnchorPane fx:id="user_acc_anchorpane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
+                           <children>
+                              <TextField fx:id="nickname_textfield" layoutX="73.0" layoutY="281.0" prefHeight="26.0" prefWidth="224.0" />
+                              <Button fx:id="change_nickname_button" layoutX="315.0" layoutY="279.0" mnemonicParsing="false" text="Сменить имя" />
+                              <Button fx:id="chang_pass_button" layoutX="315.0" layoutY="358.0" mnemonicParsing="false" text="Сменить пароль" />
+                              <ImageView fx:id="user_image_imageview" fitHeight="180.0" fitWidth="180.0" layoutX="175.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="trains_amount_label" layoutX="249.0" layoutY="233.0" text="Label" />
+                              <Button fx:id="exit_settings1" layoutX="468.0" layoutY="16.0" mnemonicParsing="false" text="Закрыть" />
+                              <Button fx:id="exit_main_button" layoutX="430.0" layoutY="526.0" mnemonicParsing="false" text="Выйти" />
+                              <Button fx:id="delete_user_button" layoutX="107.0" layoutY="529.0" mnemonicParsing="false" text="Удалить" />
+                              <Button fx:id="cancel_change_nickname_button" layoutX="427.0" layoutY="279.0" mnemonicParsing="false" text="Отмена" />
+                              <Button fx:id="accept_newnickname_button" layoutX="315.0" layoutY="279.0" mnemonicParsing="false" text="Подтвердить" />
+                              <Button fx:id="cancel_change_pass_button" layoutX="427.0" layoutY="358.0" mnemonicParsing="false" text="Отмена" />
+                              <Button fx:id="accept_newpass_button" layoutX="315.0" layoutY="358.0" mnemonicParsing="false" text="Подтвердить" />
+                              <PasswordField fx:id="newpass_field" layoutX="73.0" layoutY="361.0" prefHeight="26.0" prefWidth="222.0" />
+                              <PasswordField fx:id="accept_newpass_field" layoutX="74.0" layoutY="405.0" prefHeight="26.0" prefWidth="222.0" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab fx:id="info_tab" text="Помощь&amp;Инфо">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
          </children>
       </StackPane>
    </center>

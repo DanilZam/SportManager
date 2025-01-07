@@ -2,6 +2,7 @@ package org.app.sportmanager.repositories;
 
 import org.app.sportmanager.HashUtil;
 import org.app.sportmanager.MySQLConnection;
+import org.app.sportmanager.models.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -91,4 +92,58 @@ public class UserRepository {
 
         return false;
     }
+
+    public boolean deleteUser(User user){
+        String query = "DELETE FROM users WHERE id = ?";
+
+        try (Connection connection = MySQLConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)){
+
+            statement.setLong(1, user.getId());
+            int affectedRows = statement.executeUpdate();
+
+            if (affectedRows > 0) {
+                System.out.println("User with ID " + user.getId() + " deleted");
+                return true;
+            } else {
+                System.out.println("User with ID " + user.getId() + " not found");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+
+    public boolean updateUser(User user){
+        String query = "UPDATE users SET username = ?, password = ? WHERE id = ?";
+        String hashPassword = HashUtil.hashPassword(user.getPassword());
+
+        try (Connection connection = MySQLConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)){
+
+            statement.setString(1, user.getNickname());
+            statement.setString(2, hashPassword);
+            statement.setLong(3, user.getId());
+
+            int affectedRows = statement.executeUpdate();
+
+            if (affectedRows > 0) {
+                System.out.println("User with ID " + user.getId() + " updated");
+                return true;
+            } else {
+                System.out.println("User with ID " + user.getId() + " not found");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+
+
 }

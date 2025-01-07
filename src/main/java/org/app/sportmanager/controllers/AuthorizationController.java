@@ -100,14 +100,16 @@ public class AuthorizationController {
                     UserSession.getInstance().setCurrentUser(new User((long)userId, username, password));
                     // Загружаем FXML нового окна
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/main-view.fxml"));
-                    Parent root = loader.load();
+                    //Parent root = loader.load();
 
                     // Получаем Stage из события
                     Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
+                    Scene scene = new Scene(loader.load());
+                    String css = this.getClass().getResource("/styles/main.css").toExternalForm();
+                    scene.getStylesheets().add(css);
                     // Создаем и настраиваем новое окно
                     Stage newStage = new Stage();
-                    newStage.setScene(new Scene(root));
+                    newStage.setScene(scene);
                     newStage.setTitle("Sport Manager"); // Заголовок нового окна
                     newStage.show();
 

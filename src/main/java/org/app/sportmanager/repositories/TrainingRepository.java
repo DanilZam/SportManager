@@ -2,6 +2,7 @@ package org.app.sportmanager.repositories;
 
 import com.mongodb.client.*;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.result.DeleteResult;
 import org.app.sportmanager.models.Exercise;
 import org.app.sportmanager.models.Training;
 import org.bson.Document;
@@ -107,6 +108,27 @@ public class TrainingRepository {
 
         return doc;
     }
+
+    public boolean deleteTrainingsByUserId(long userId) {
+        try {
+            // Удаляем все записи с указанным userId
+            DeleteResult result = collection.deleteMany(Filters.eq("userId", String.valueOf(userId)));
+            long deletedCount = result.getDeletedCount();
+
+            if (deletedCount > 0) {
+                System.out.println("Успешно удалено тренировок: " + deletedCount);
+                return true; // Подтверждаем успех
+            } else {
+                System.out.println("Не найдено тренировок для удаления с userId " + userId);
+                return false; // Ничего не удалено
+            }
+        } catch (Exception e) {
+            System.err.println("Ошибка при удалении тренировок пользователя с userId " + userId);
+            e.printStackTrace();
+            return false; // В случае ошибки
+        }
+    }
+
 
     public void close() {
         mongoClient.close(); // Закрытие mongoClient
